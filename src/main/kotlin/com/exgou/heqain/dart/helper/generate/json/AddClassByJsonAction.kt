@@ -23,7 +23,7 @@ class AddClassByJsonAction : AnAction() {
 
         if (null != view && project != null) {
             JsonToDartObject.main(project) { name: String, text: String ->
-                onSave(project, editor, file!!, name, text)
+                onSave(project, editor, name, text)
             }
         }
     }
@@ -31,7 +31,6 @@ class AddClassByJsonAction : AnAction() {
     private fun onSave(
         project: Project,
         editor: Editor?,
-        file: PsiFile,
         name: String,
         text: String
     ) {
