@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "com.example"
-version = "1.3.3"
+version = "1.3.0"
 
 repositories {
     mavenCentral()
@@ -36,7 +36,7 @@ tasks {
 
     patchPluginXml {
         sinceBuild.set("212")
-        untilBuild.set("222.*")
+        untilBuild.set("280")
     }
 
     signPlugin {
@@ -49,4 +49,3 @@ tasks {
         token.set(System.getenv("PUBLISH_TOKEN"))
     }
 }
-

@@ -47,15 +47,17 @@ class AddClassByJsonAction : AnAction() {
     override fun update(e: AnActionEvent) {
         val editorAndPsiFile = getEditorAndPsiFile(e)
         val editor = editorAndPsiFile.first as Editor
-        val psiFile = editorAndPsiFile.second as PsiFile
         val caretOffset = editor.caretModel.offset
-        val enable = psiFile is DartFile && this.doEnable(
-            PsiTreeUtil.getParentOfType(
-                psiFile.findElementAt(caretOffset),
-                DartClass::class.java
+        if (editorAndPsiFile.second != null) {
+            val psiFile = editorAndPsiFile.second as PsiFile
+            val enable = psiFile is DartFile && this.doEnable(
+                PsiTreeUtil.getParentOfType(
+                    psiFile.findElementAt(caretOffset),
+                    DartClass::class.java
+                )
             )
-        )
-        e.presentation.isEnabledAndVisible = enable
+            e.presentation.isEnabledAndVisible = enable
+        }
     }
 
     protected fun doEnable(dartClass: DartClass?): Boolean {
@@ -70,4 +72,3 @@ class AddClassByJsonAction : AnAction() {
         }
     }
 }
-
